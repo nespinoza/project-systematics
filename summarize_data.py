@@ -1,4 +1,5 @@
 import lightkurve as lk
+import numpy as np
 import pandas as pd
 
 
@@ -29,6 +30,10 @@ for i, row in cat.iterrows():
     )
     sr_tessffi = lk.search_tesscut(tic_id)
     sr_tessshort = lk.search_targetpixelfile(tic_id, mission='TESS')
+    if len(sr_tessshort):
+        # (Having some trouble with TIC IDs)
+        idx_good = np.where(sr_tessshort.target_name == str(row.tic_id))
+        sr_tessshort = sr_tessshort[idx_good]
 
     # Record results
     n_quarters.append(len(sr_keplerlong))
