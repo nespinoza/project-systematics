@@ -39,8 +39,8 @@ for i, row in cat.iterrows():
     tess_short.append(bool(len(sr_tessshort)))
 
 df = pd.DataFrame({
-    'kic_id': kic_id,
-    'tic_id': tic_id,
+    'kic_id': cat.kic_id,
+    'tic_id': cat.tic_id,
     'n_quarters': n_quarters,
     'kepler_long': kepler_long,
     'kepler_short': kepler_short,
