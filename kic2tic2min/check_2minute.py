@@ -12,9 +12,11 @@ for i in range(len(objects['TIC'])):
     obs_table = Observations.query_object('TIC'+str(TICID),radius='.02 deg')
     for j in range(len(obs_table['dataURL'])):
         if 's_lc.fits' in obs_table['dataURL'][j]:
-            print('TIC', objects['TIC'][i],' KIC',objects['KIC'][i],'has 2min cadence data.')
-            tmin_kics = np.append(tmin_kics,objects['KIC'][i])
-            tmin_tics = np.append(tmin_tics,TICID)
+            v = obs_table['dataURL'][j].split('-') 
+            if int(v[-3]) == int(TICID):
+                print('TIC', objects['TIC'][i],' KIC',objects['KIC'][i],'has 2min cadence data.')
+                tmin_kics = np.append(tmin_kics,objects['KIC'][i])
+                tmin_tics = np.append(tmin_tics,TICID)
 fout = open('2min_tics_kics.txt','w')
 fout.write('#TICID     KICID\n')
 for i in range(len(tmin_tics)):
